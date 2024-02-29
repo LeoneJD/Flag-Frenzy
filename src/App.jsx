@@ -10,6 +10,17 @@ import { motion } from "framer-motion"
 
 function App() {
   const [count, setCount] = useState(0)
+  
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+
+    fetch("https://countriesnow.space/api/v0.1/countries/capital", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+  
 
   return (
     <>
@@ -43,11 +54,9 @@ function App() {
           borderRadius: ["20%", "20%", "50%", "50%", "20%"],
         }}
       />
-
-
+      
     </>
   )
 }
 
 export default App
-
