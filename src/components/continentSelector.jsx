@@ -6,20 +6,16 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 
-function ContinentSelector({}) {
+export default function ContinentSelector() {
     return (
-        <container className="ContinentSelector">
             <Autocomplete
             disablePortal
             id="combo-box-demo"
-            // options={top100Films}
+            options={continents}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Continent" />}
             />
-        </container>
-    );
-}
-
-const options = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
-
-export default ContinentSelector
+        );
+    }
+        
+const continents = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
