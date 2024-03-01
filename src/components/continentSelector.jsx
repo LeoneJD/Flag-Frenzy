@@ -8,13 +8,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 export default function ContinentSelector() {
     return (
+            <div className="continentAutocomplete">
             <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={continents}
             sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Continent" />}
+            renderInput={(params) => <TextField {...params} label="Choose a continent" InputLabelProps={{ style: { color: 'white' } }}/>}
             />
+            </div>
         );
     }
         

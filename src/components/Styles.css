@@ -1,0 +1,36 @@
+/* Footer.css */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1976d2;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-links a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 1rem;
+    color: inherit;
+  }
+  
+  .footer-links a:hover {
+    opacity: 70%;
+  }
+  
+  .continentAutocomplete {
+    background-color:  #1976d2;
+  }
