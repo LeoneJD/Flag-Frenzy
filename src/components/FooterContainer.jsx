@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, IconButton, Link } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import './Footer.css'; // Import the CSS file
+import './Styles.css'; // Import the CSS file
 
 const Footer = () => {
   // Array of GitHub links and their corresponding text
