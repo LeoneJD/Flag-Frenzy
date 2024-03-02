@@ -9,6 +9,7 @@ import AmericaSouth from '../assets/images/americaSouth.png'
 import Asia from '../assets/images/asia.png'
 import Europe from '../assets/images/europe.png'
 import Oceania from '../assets/images/oceania.png'
+import Flags from './Flags'; // Import the Flags component
 
 
 export default function ContinentSelector() {
@@ -46,6 +47,7 @@ export default function ContinentSelector() {
                         />
                     </motion.div>
                 )}
+                <Flags selectedContinent={selectedContinent} /> {/* Pass selected value as props to Flags */}
         </div>
     );
 }
