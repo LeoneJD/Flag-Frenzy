@@ -27,15 +27,25 @@ export default function ContinentSelector() {
                 options={continents}
                 sx={{ width: 350 }}
                 onChange={handleContinentChange}
-                renderInput={(params) => <TextField {...params} label="Choose a continent" InputLabelProps={{ style: { color: 'white' } }}/>}
+                renderInput={(params) => 
+                    <TextField 
+                        {...params} 
+                        label="Choose a continent" 
+                        InputLabelProps={{ style: { color: 'white' } }}/>}
             />
-            {selectedContinent && (
-                <div>
-                    {/* Add your image here */}
-                    {/* <img src={Europe} alt="Europe continent image" /> */}
-                    {getImageForContinent(selectedContinent)}
-                </div>
-            )}
+                {selectedContinent && (
+                    <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 2 }}
+                    >
+                        {/* Display image for selected continent */}
+                        <img
+                            src={getImageForContinent(selectedContinent)}
+                            alt={selectedContinent}
+                        />
+                    </motion.div>
+                )}
         </div>
     );
 }
@@ -45,17 +55,17 @@ const continents = ['Africa', 'North America', 'South America', 'Asia', 'Europe'
 const getImageForContinent = (continent) => {
     switch (continent) {
         case 'Africa':
-            return <img src={Africa} alt="Africa" />;
+            return Africa;
         case 'North America':
-            return <img src={AmericaNorth} alt="North America" />;
+            return AmericaNorth;
         case 'South America':
-            return <img src={AmericaSouth} alt="South America" />;
+            return AmericaSouth;
         case 'Asia':
-            return <img src={Asia} alt="Asia" />;
+            return Asia;
         case 'Europe':
-            return <img src={Europe} alt="Europe" />;
+            return Europe;
         case 'Oceania':
-            return <img src={Oceania} alt="Oceania" />;
+            return Oceania;
         default:
             return null;
     }
