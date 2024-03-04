@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <AppBar position="fixed">
       <Toolbar>
@@ -14,7 +14,11 @@ const Navbar = () => {
         
         {/* Score counter */}
         <Typography variant="h6" sx={{ marginRight: 2 }}>
-          Score: 100
+          Attempts: {props.counter} /10
+        </Typography>
+        {/* Score counter */}
+        <Typography variant="h6" sx={{ marginRight: 2 }}>
+          Score: {props.score}
         </Typography>
         
         {/* Button for high scores */}

@@ -6,12 +6,11 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-const Flags = ({ selectedContinent }) => {
+const Flags = (props) => {
+    console.log(props);
     const [info, setInfo] = useState([]);
     const [randomCountries, setRandomCountries] = useState([]);
     const [randomName, setRandomName] = useState(null);
-    const [counter, setCounter] = useState(0);
-    const [score, setScore] = useState(0);
     const [disableButtons, setDisableButtons] = useState(false);
     const [userName, setUserName] = useState('');
     const [feedback, setFeedback] = useState(null);
@@ -20,7 +19,7 @@ const Flags = ({ selectedContinent }) => {
         const fetchData = async () => {
             try {
                 // Fetches flags from user specified continent
-                const response = await fetch(`https://restcountries.com/v3.1/region/${selectedContinent}?fields=name,flags`);
+                const response = await fetch(`https://restcountries.com/v3.1/region/${props.selectedContinent}?fields=name,flags`);
                 const data = await response.json();
                 const randomCountries = chooseRandomCountries(data, 4);
                 const randomName = randomCountries[Math.floor(Math.random() * randomCountries.length)].name.common;
@@ -34,7 +33,7 @@ const Flags = ({ selectedContinent }) => {
 
         fetchData();
 
-    }, [selectedContinent, counter]);
+    }, [props.selectedContinent, props.counter]);
 
     const chooseRandomCountries = (data, count) => {
         const randomCountries = [];
@@ -51,16 +50,16 @@ const Flags = ({ selectedContinent }) => {
             // Check if the clicked button matches the country name
             if (randomName === clickedCountry) {
                 setFeedback('Correct!');
-                setScore(score + 1);
+                props.setScore(props.score + 1);
             } else {
                 setFeedback('Sorry, wrong answer!');
             }
             setTimeout(() => {
                 // Clear the feedback after 1 second
-                setFeedback(null); 
+                setFeedback(null);
             }, 1000);
-            setCounter(counter + 1);
-            if (counter >= 9) {
+            props.setCounter(props.counter + 1);
+            if (props.counter >= 9) {
                 setDisableButtons(true);
                 const name = prompt('Game over. Enter your name:');
                 if (name) {
@@ -72,17 +71,12 @@ const Flags = ({ selectedContinent }) => {
 
     return (
         <div>
-            {selectedContinent && (
+            {props.selectedContinent && (
                 <>
                     <h1>{randomName}</h1>
                     {randomCountries.length > 0 && (
                         <div>
-                            <h3>Which flag does this country belong to?</h3>
-                            {feedback && (
-                                <div style={{ color: feedback === 'Correct!' ? 'green' : 'red', fontWeight: 'bold' }}>
-                                    {feedback}
-                                </div>
-                            )}
+                            <h3>Which country does this flag belong to?</h3>
                             <Grid container spacing={2}>
                                 {randomCountries.map((country, index) => (
                                     <Grid item xs={6} sm={3} key={index}>
@@ -101,9 +95,12 @@ const Flags = ({ selectedContinent }) => {
                             </Grid>
                         </div>
                     )}
-                    <h2>Attempts: {counter}</h2>
-                    <h2>Score: {score}</h2>
-                    {counter >= 9 && (
+                    {feedback && (
+                        <div style={{ color: feedback === 'Correct!' ? 'green' : 'red', padding: '0.5rem', fontWeight: 'bold' }}>
+                            {feedback}
+                        </div>
+                    )}
+                    {props.counter >= 10 && (
                         <h2>Thank you for playing, {userName}!</h2>
                     )}
                     {/* <h2>Here you have a random fact</h2> */}
