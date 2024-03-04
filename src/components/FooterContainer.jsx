@@ -26,7 +26,7 @@ const Footer = () => {
             <IconButton color="inherit" className="github-icon">
               <GitHubIcon />
             </IconButton>
-            <Typography variant="footer-links">
+            <Typography>
               {text}
             </Typography>
           </Link>

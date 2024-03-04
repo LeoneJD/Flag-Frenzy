@@ -22,32 +22,34 @@ export default function ContinentSelector() {
 
     return (
         <div className="continentAutocomplete">
-            <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={continents}
-                sx={{ width: 350 }}
-                onChange={handleContinentChange}
-                renderInput={(params) => 
-                    <TextField 
-                        {...params} 
-                        label="Choose a continent" 
-                        InputLabelProps={{ style: { color: 'white' } }}/>}
-            />
-                {selectedContinent && (
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 2 }}
-                    >
-                        {/* Display image for selected continent */}
-                        <img
-                            src={getImageForContinent(selectedContinent)}
-                            alt={selectedContinent}
-                        />
-                    </motion.div>
-                )}
-                <Flags selectedContinent={selectedContinent} /> {/* Pass selected value as props to Flags */}
+            {!selectedContinent && (
+                <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={continents}
+                    sx={{ width: 350 }}
+                    onChange={handleContinentChange}
+                    renderInput={(params) => 
+                        <TextField 
+                            {...params} 
+                            label="Choose a continent" 
+                            InputLabelProps={{ style: { color: 'white' } }}/>}
+                />
+            )}
+            {selectedContinent && (
+                <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 2 }}
+                >
+                    {/* Display image for selected continent */}
+                    <img
+                        src={getImageForContinent(selectedContinent)}
+                        alt={selectedContinent}
+                    />
+                </motion.div>
+            )}
+            {selectedContinent && <Flags selectedContinent={selectedContinent} />} {/* Pass selected value as props to Flags */}
         </div>
     );
 }
