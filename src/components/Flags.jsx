@@ -10,6 +10,8 @@ const Flags = ({ selectedContinent }) => {
     const [randomName, setRandomName] = useState(null);
     const [counter, setCounter] = useState(0);
     const [score, setScore] = useState(0);
+    const [disableButtons, setDisableButtons] = useState(false);
+    const [userName, setUserName] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,15 +65,22 @@ const Flags = ({ selectedContinent }) => {
     };
 
     const handleButtonClick = (clickedCountry) => {
-        console.log('Button clicked for:', clickedCountry);
-        setCounter(counter + 1); // Increment attempt counter every time a button is clicked
-        if (randomName === clickedCountry) {
-            alert('YES, you are right!');
-            if (counter < 9) {
-                setScore(score + 1); // Increment score only if the counter is less than 9
+        if (!disableButtons) {
+            console.log('Button clicked for:', clickedCountry);
+            if (randomName === clickedCountry) {
+                alert('YES, you are right!');
+                setScore(score + 1);
+            } else {
+                alert('Sorry, wrong answer. Keep trying');
             }
-        } else {
-            alert('Sorry, wrong answer. Keep trying');
+            setCounter(counter + 1);
+            if (counter >= 9) {
+                setDisableButtons(true);
+                const name = prompt('Game over. Enter your name:');
+                if (name) {
+                    setUserName(name);
+                }
+            }
         }
     };
 
@@ -82,22 +91,26 @@ const Flags = ({ selectedContinent }) => {
                 <div>
                     <h2>Which flag does this country belong to?</h2>
                     <h2>{randomName}</h2>
-                    <Button onClick={() => handleButtonClick(randomCountry.name.common)}>
+                    <Button onClick={() => handleButtonClick(randomCountry.name.common)} disabled={disableButtons}>
                         <img src={randomCountry.flags.png} alt="" />
                     </Button>
-                    <Button onClick={() => handleButtonClick(randomCountry2.name.common)}>
+                    <Button onClick={() => handleButtonClick(randomCountry2.name.common)} disabled={disableButtons}>
                         <img src={randomCountry2.flags.png} alt="" />
                     </Button>
-                    <Button onClick={() => handleButtonClick(randomCountry3.name.common)}>
+                    <Button onClick={() => handleButtonClick(randomCountry3.name.common)} disabled={disableButtons}>
                         <img src={randomCountry3.flags.png} alt="" />
                     </Button>
-                    <Button onClick={() => handleButtonClick(randomCountry4.name.common)}>
+                    <Button onClick={() => handleButtonClick(randomCountry4.name.common)} disabled={disableButtons}>
                         <img src={randomCountry4.flags.png} alt="" />
                     </Button>
                 </div>
             )}
-            <h2>Attempts: {counter} </h2>
+            <h2>Attempts: {counter}</h2>
             <h2>Score: {score}</h2>
+            {counter >= 9 && (
+                <h2>Thank you for playing, {userName}!</h2>
+            )}
+            {/* <h2>Here you have a joke</h2> */}
         </div>
     );
 };
