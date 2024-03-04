@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
 const Flags = ({ selectedContinent }) => {
     const [info, setInfo] = useState([]);
-    const [randomCountry, setRandomCountry] = useState(null);
-    const [randomCountry2, setRandomCountry2] = useState(null);
-    const [randomCountry3, setRandomCountry3] = useState(null);
-    const [randomCountry4, setRandomCountry4] = useState(null);
+    const [randomCountries, setRandomCountries] = useState([]);
     const [randomName, setRandomName] = useState(null);
     const [counter, setCounter] = useState(0);
     const [score, setScore] = useState(0);
@@ -16,15 +18,13 @@ const Flags = ({ selectedContinent }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // Fetches flags from user specified continent
                 const response = await fetch(`https://restcountries.com/v3.1/region/${selectedContinent}?fields=name,flags`);
                 const data = await response.json();
-                console.log(selectedContinent);
-                const nameList = [];
-                nameList.push(chooseRandomCountry(data));
-                nameList.push(chooseRandomCountry2(data));
-                nameList.push(chooseRandomCountry3(data));
-                nameList.push(chooseRandomCountry4(data));
-                pickRandomCountryName(nameList);
+                const randomCountries = chooseRandomCountries(data, 4);
+                const randomName = randomCountries[Math.floor(Math.random() * randomCountries.length)].name.common;
+                setRandomCountries(randomCountries);
+                setRandomName(randomName);
                 setInfo(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -35,38 +35,20 @@ const Flags = ({ selectedContinent }) => {
 
     }, [selectedContinent, counter]);
 
-    const chooseRandomCountry = (data) => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        setRandomCountry(data[randomIndex]);
-        return data[randomIndex].name.common;
-    };
-
-    const chooseRandomCountry2 = (data) => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        setRandomCountry2(data[randomIndex]);
-        return data[randomIndex].name.common;
-    };
-
-    const chooseRandomCountry3 = (data) => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        setRandomCountry3(data[randomIndex]);
-        return data[randomIndex].name.common;
-    };
-
-    const chooseRandomCountry4 = (data) => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        setRandomCountry4(data[randomIndex]);
-        return data[randomIndex].name.common;
-    };
-
-    const pickRandomCountryName = (nameList) => {
-        const randomIndex = Math.floor(Math.random() * nameList.length);
-        setRandomName(nameList[randomIndex]);
+    const chooseRandomCountries = (data, count) => {
+        const randomCountries = [];
+        while (randomCountries.length < count) {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            randomCountries.push(data[randomIndex]);
+        }
+        // Returns an array of randomly selected countries
+        return randomCountries;
     };
 
     const handleButtonClick = (clickedCountry) => {
         if (!disableButtons) {
-            console.log('Button clicked for:', clickedCountry);
+            // console.log('Button clicked for:', clickedCountry);
+            // Check if the clicked button matches the country name
             if (randomName === clickedCountry) {
                 alert('YES, you are right!');
                 setScore(score + 1);
@@ -87,22 +69,26 @@ const Flags = ({ selectedContinent }) => {
     return (
         <div>
             <h1>Guess the Flag</h1>
-            {randomCountry && (
+            {randomCountries.length > 0 && (
                 <div>
                     <h2>Which flag does this country belong to?</h2>
                     <h2>{randomName}</h2>
-                    <Button onClick={() => handleButtonClick(randomCountry.name.common)} disabled={disableButtons}>
-                        <img src={randomCountry.flags.png} alt="" />
-                    </Button>
-                    <Button onClick={() => handleButtonClick(randomCountry2.name.common)} disabled={disableButtons}>
-                        <img src={randomCountry2.flags.png} alt="" />
-                    </Button>
-                    <Button onClick={() => handleButtonClick(randomCountry3.name.common)} disabled={disableButtons}>
-                        <img src={randomCountry3.flags.png} alt="" />
-                    </Button>
-                    <Button onClick={() => handleButtonClick(randomCountry4.name.common)} disabled={disableButtons}>
-                        <img src={randomCountry4.flags.png} alt="" />
-                    </Button>
+                    <Grid container spacing={2}>
+                        {randomCountries.map((country, index) => (
+                            <Grid item xs={6} sm={3} key={index}>
+                                <Card>
+                                    <CardActionArea onClick={() => handleButtonClick(country.name.common)} disabled={disableButtons}>
+                                        <CardMedia
+                                            component="img"
+                                            height="140"
+                                            image={country.flags.png}
+                                            alt={country.name.common}
+                                        />
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
                 </div>
             )}
             <h2>Attempts: {counter}</h2>
@@ -110,7 +96,7 @@ const Flags = ({ selectedContinent }) => {
             {counter >= 9 && (
                 <h2>Thank you for playing, {userName}!</h2>
             )}
-            {/* <h2>Here you have a joke</h2> */}
+            {/* <h2>Here you have a random fact</h2> */}
         </div>
     );
 };
