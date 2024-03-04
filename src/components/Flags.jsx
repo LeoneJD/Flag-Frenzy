@@ -63,11 +63,14 @@ const pickRandomCountryName = (nameList) => {
     setRandomName(nameList[randomIndex])
 }
 
-const handleButtonClick = (country) => {
-    console.log('Button clicked for:', country);
-    // Handle button click action here
-}; 
-
+const handleButtonClick = (clickedCountry) => {
+    console.log('Button clicked for:', clickedCountry);
+    if (randomName === clickedCountry) {
+        alert('YES, you are right!');
+    } else {
+        alert('Sorry, wrong answer. Keep trying');
+    }
+};
 return (
     <div>
         <h1>Guess the Flag</h1>
