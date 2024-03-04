@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
 
 
 const Flags = ({ selectedContinent }) => {
@@ -62,21 +63,32 @@ const pickRandomCountryName = (nameList) => {
     setRandomName(nameList[randomIndex])
 }
 
+const handleButtonClick = (country) => {
+    console.log('Button clicked for:', country);
+    // Handle button click action here
+}; 
+
 return (
     <div>
-        {/* Display Flags component content here */}
         <h1>Guess the Flag</h1>
-    {randomCountry && (
-    <div>
-        <h2>Which flag does this country belong to?</h2>
-        <h2>{randomName}</h2>
-        <button><img src={randomCountry.flags.png} alt="" /></button>
-        <button><img src={randomCountry2.flags.png} alt="" /></button>
-        <button><img src={randomCountry3.flags.png} alt="" /></button>
-        <button><img src={randomCountry4.flags.png} alt="" /></button>
-
-    </div>
-    )}
+        {randomCountry && (
+            <div>
+                <h2>Which flag does this country belong to?</h2>
+                <h2>{randomName}</h2>
+                <Button onClick={() => handleButtonClick(randomCountry.name.common)}>
+                    <img src={randomCountry.flags.png} alt="" />
+                </Button>
+                <Button onClick={() => handleButtonClick(randomCountry2.name.common)}>
+                    <img src={randomCountry2.flags.png} alt="" />
+                </Button>
+                <Button onClick={() => handleButtonClick(randomCountry3.name.common)}>
+                    <img src={randomCountry3.flags.png} alt="" />
+                </Button>
+                <Button onClick={() => handleButtonClick(randomCountry4.name.common)}>
+                    <img src={randomCountry4.flags.png} alt="" />
+                </Button>
+            </div>
+        )}
     </div>
 );
 };
