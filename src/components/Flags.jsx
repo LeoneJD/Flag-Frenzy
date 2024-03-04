@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
 
 
 const Flags = ({ selectedContinent }) => {
@@ -8,26 +9,29 @@ const Flags = ({ selectedContinent }) => {
     const [randomCountry3, setRandomCountry3] = useState(null);
     const [randomCountry4, setRandomCountry4] = useState(null);
     const [randomName, setRandomName] = useState(null);
+    const [counter, setCounter] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(`https://restcountries.com/v3.1/region/${selectedContinent}?fields=name,flags`);
                 const data = await response.json();
-                console.log(data);
-                chooseRandomCountry(data);
-                chooseRandomCountry2(data);
-                chooseRandomCountry3(data);
-                chooseRandomCountry4(data);
+                console.log(selectedContinent);
+                const nameList = []
+                nameList.push(chooseRandomCountry(data));
+                nameList.push(chooseRandomCountry2(data));
+                nameList.push(chooseRandomCountry3(data));
+                nameList.push(chooseRandomCountry4(data));
+                pickRandomCountryName(nameList)
                 setInfo(data)
-                
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
 
         fetchData();
-    }, [selectedContinent]);
+
+    }, [selectedContinent, counter]);
     console.log (info)
     if(info.length > 1)
 {
@@ -37,51 +41,63 @@ const Flags = ({ selectedContinent }) => {
 const chooseRandomCountry = (data) => {
     const randomIndex = Math.floor(Math.random() * data.length);
     setRandomCountry(data[randomIndex])
+    return data[randomIndex].name.common
 }
 const chooseRandomCountry2 = (data) => {
     const randomIndex = Math.floor(Math.random() * data.length);
     setRandomCountry2(data[randomIndex]);
+    return data[randomIndex].name.common
 }
 const chooseRandomCountry3 = (data) => {
     const randomIndex = Math.floor(Math.random() * data.length);
     setRandomCountry3(data[randomIndex]);
+    return data[randomIndex].name.common
 }
 const chooseRandomCountry4 = (data) => {
     const randomIndex = Math.floor(Math.random() * data.length);
     setRandomCountry4(data[randomIndex]);
+    return data[randomIndex].name.common
 }
 
-function name() { 
-    
-    //randomCountry.name.common
-    //randomCountry2.name.common
-    let nameList = []
-    nameList.push(randomCountry.name.common);
-    nameList.push(randomCountry2.name.common);
-    nameList.push(randomCountry3.name.common);
-    nameList.push(randomCountry4.name.common);
-    console.log(nameList)
+const pickRandomCountryName = (nameList) => {
+    const randomIndex = Math.floor(Math.random() * nameList.length);
+    setRandomName(nameList[randomIndex])
+}
 
-}
-if(randomCountry){
-name();
-}
-    return (
-        <div>
-            {/* Display Flags component content here */}
-            <h1>Random Country</h1>
+const handleButtonClick = (clickedCountry) => {
+    console.log('Button clicked for:', clickedCountry);
+    if (randomName === clickedCountry) {
+        alert('YES, you are right!');
+        if (counter < 10) {
+            setCounter(counter + 1);
+        }
+    } else {
+        alert('Sorry, wrong answer. Keep trying');
+    }
+};
+return (
+    <div>
+        <h1>Guess the Flag</h1>
         {randomCountry && (
-        <div>
-            <h2>{randomCountry.name.common}</h2>
-            <button><img src={randomCountry.flags.png} alt="" /></button>
-            <button><img src={randomCountry2.flags.png} alt="" /></button>
-            <button><img src={randomCountry3.flags.png} alt="" /></button>
-            <button><img src={randomCountry4.flags.png} alt="" /></button>
-
-        </div>
+            <div>
+                <h2>Which flag does this country belong to?</h2>
+                <h2>{randomName}</h2>
+                <Button onClick={() => handleButtonClick(randomCountry.name.common)}>
+                    <img src={randomCountry.flags.png} alt="" />
+                </Button>
+                <Button onClick={() => handleButtonClick(randomCountry2.name.common)}>
+                    <img src={randomCountry2.flags.png} alt="" />
+                </Button>
+                <Button onClick={() => handleButtonClick(randomCountry3.name.common)}>
+                    <img src={randomCountry3.flags.png} alt="" />
+                </Button>
+                <Button onClick={() => handleButtonClick(randomCountry4.name.common)}>
+                    <img src={randomCountry4.flags.png} alt="" />
+                </Button>
+            </div>
         )}
-        </div>
-    );
+    </div>
+);
 };
 
 export default Flags;
