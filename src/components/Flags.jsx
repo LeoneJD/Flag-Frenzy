@@ -14,6 +14,7 @@ const Flags = ({ selectedContinent }) => {
     const [score, setScore] = useState(0);
     const [disableButtons, setDisableButtons] = useState(false);
     const [userName, setUserName] = useState('');
+    const [feedback, setFeedback] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -47,14 +48,17 @@ const Flags = ({ selectedContinent }) => {
 
     const handleButtonClick = (clickedCountry) => {
         if (!disableButtons) {
-            // console.log('Button clicked for:', clickedCountry);
             // Check if the clicked button matches the country name
             if (randomName === clickedCountry) {
-                alert('YES, you are right!');
+                setFeedback('Correct!');
                 setScore(score + 1);
             } else {
-                alert('Sorry, wrong answer. Keep trying');
+                setFeedback('Sorry, wrong answer!');
             }
+            setTimeout(() => {
+                // Clear the feedback after 1 second
+                setFeedback(null); 
+            }, 1000);
             setCounter(counter + 1);
             if (counter >= 9) {
                 setDisableButtons(true);
@@ -68,35 +72,43 @@ const Flags = ({ selectedContinent }) => {
 
     return (
         <div>
-            <h1>Guess the Flag</h1>
-            {randomCountries.length > 0 && (
-                <div>
-                    <h2>Which flag does this country belong to?</h2>
-                    <h2>{randomName}</h2>
-                    <Grid container spacing={2}>
-                        {randomCountries.map((country, index) => (
-                            <Grid item xs={6} sm={3} key={index}>
-                                <Card>
-                                    <CardActionArea onClick={() => handleButtonClick(country.name.common)} disabled={disableButtons}>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                            image={country.flags.png}
-                                            alt={country.name.common}
-                                        />
-                                    </CardActionArea>
-                                </Card>
+            {selectedContinent && (
+                <>
+                    <h1>{randomName}</h1>
+                    {randomCountries.length > 0 && (
+                        <div>
+                            <h3>Which flag does this country belong to?</h3>
+                            {feedback && (
+                                <div style={{ color: feedback === 'Correct!' ? 'green' : 'red', fontWeight: 'bold' }}>
+                                    {feedback}
+                                </div>
+                            )}
+                            <Grid container spacing={2}>
+                                {randomCountries.map((country, index) => (
+                                    <Grid item xs={6} sm={3} key={index}>
+                                        <Card>
+                                            <CardActionArea onClick={() => handleButtonClick(country.name.common)} disabled={disableButtons}>
+                                                <CardMedia
+                                                    component="img"
+                                                    height="140"
+                                                    image={country.flags.png}
+                                                    alt={country.name.common}
+                                                />
+                                            </CardActionArea>
+                                        </Card>
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
-                </div>
+                        </div>
+                    )}
+                    <h2>Attempts: {counter}</h2>
+                    <h2>Score: {score}</h2>
+                    {counter >= 9 && (
+                        <h2>Thank you for playing, {userName}!</h2>
+                    )}
+                    {/* <h2>Here you have a random fact</h2> */}
+                </>
             )}
-            <h2>Attempts: {counter}</h2>
-            <h2>Score: {score}</h2>
-            {counter >= 9 && (
-                <h2>Thank you for playing, {userName}!</h2>
-            )}
-            {/* <h2>Here you have a random fact</h2> */}
         </div>
     );
 };

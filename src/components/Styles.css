@@ -24,13 +24,14 @@
     align-items: center;
     text-decoration: none;
     margin-right: 1rem;
-    color: inherit;
+    color: white;
   }
   
   .footer-links a:hover {
-    opacity: 70%;
+    color: rgb(213, 207, 207);
   }
   
   .continentAutocomplete {
+    padding: 5rem;
     background-color:  #1976d2;
   }
