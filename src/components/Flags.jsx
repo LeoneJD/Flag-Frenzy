@@ -9,6 +9,7 @@ const Flags = ({ selectedContinent }) => {
     const [randomCountry3, setRandomCountry3] = useState(null);
     const [randomCountry4, setRandomCountry4] = useState(null);
     const [randomName, setRandomName] = useState(null);
+    const [counter, setCounter] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,7 +31,7 @@ const Flags = ({ selectedContinent }) => {
 
         fetchData();
 
-    }, [selectedContinent]);
+    }, [selectedContinent, counter]);
     console.log (info)
     if(info.length > 1)
 {
@@ -67,6 +68,9 @@ const handleButtonClick = (clickedCountry) => {
     console.log('Button clicked for:', clickedCountry);
     if (randomName === clickedCountry) {
         alert('YES, you are right!');
+        if (counter < 10) {
+            setCounter(counter + 1);
+        }
     } else {
         alert('Sorry, wrong answer. Keep trying');
     }
