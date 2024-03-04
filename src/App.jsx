@@ -6,17 +6,18 @@ import Button from '@mui/material/Button';
 import { motion } from "framer-motion"
 import NavBar from './components/NavBar';
 import Footer from './components/FooterContainer';
-import ContinentSelector from './components/continentSelector';
-import Flags from './components/Flags';
+import ContinentSelector from './components/ContinentSelector';
 
 
 function App() {
+  const [counter, setCounter] = useState(0);
+  const [score, setScore] = useState(0);
+
   return (
     <>
-      <NavBar />
+      <NavBar counter={counter} score={score}/>
       <div>
-        < ContinentSelector/>
-        < Flags />
+        < ContinentSelector setScore={setScore} setCounter={setCounter} score={score} counter={counter}/>
       </div>
       <Footer />
 

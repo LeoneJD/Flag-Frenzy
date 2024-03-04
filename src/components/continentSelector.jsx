@@ -12,7 +12,7 @@ import Oceania from '../assets/images/oceania.png'
 import Flags from './Flags'; // Import the Flags component
 
 
-export default function ContinentSelector() {
+export default function ContinentSelector(props) {
     const [selectedContinent, setSelectedContinent] = useState(null);
 
     const handleContinentChange = (event, value) => {
@@ -49,7 +49,7 @@ export default function ContinentSelector() {
                     />
                 </motion.div>
             )}
-            {selectedContinent && <Flags selectedContinent={selectedContinent} />} {/* Pass selected value as props to Flags */}
+            {selectedContinent && <Flags selectedContinent={selectedContinent} setScore={props.setScore} setCounter={props.setCounter} counter={props.counter} score={props.score}  />} {/* Pass selected value as props to Flags */}
         </div>
     );
 }
