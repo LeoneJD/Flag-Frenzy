@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import ContinentSelector from '../components/ContinentSelector';
+import ContinentSelector from '../components/ContinentSelector.jsx';
 
 const LandingPage = ({ counter, score, setScore, setCounter }) => {
 
@@ -8,7 +7,7 @@ const LandingPage = ({ counter, score, setScore, setCounter }) => {
 
         <h2>Welcome! Let's see your knowledge of country flags! </h2>
         <div>
-            < ContinentSelector setScore={setScore} setCounter={setCounter} score={score} counter={counter}/>
+            <ContinentSelector setScore={setScore} setCounter={setCounter} score={score} counter={counter}/>
         </div>
 
     </>
