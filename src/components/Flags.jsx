@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+
 
 const Flags = (props) => {
     console.log(props);
