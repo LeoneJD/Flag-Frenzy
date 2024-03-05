@@ -57,7 +57,7 @@ const Flags = (props) => {
             setTimeout(() => {
                 // Clear the feedback after 1 second
                 setFeedback(null);
-            }, 1000);
+            }, 2000);
             props.setCounter(props.counter + 1);
             if (props.counter >= 9) {
                 setDisableButtons(true);
@@ -69,6 +69,7 @@ const Flags = (props) => {
         }
     };
 
+    
     return (
         <div>
             {props.selectedContinent && (
@@ -76,7 +77,7 @@ const Flags = (props) => {
                     <h1>{randomName}</h1>
                     {randomCountries.length > 0 && (
                         <div>
-                            <h3>Which country does this flag belong to?</h3>
+                            <h3>Which flag does this country belong to?</h3>
                             <Grid container spacing={2}>
                                 {randomCountries.map((country, index) => (
                                     <Grid item xs={6} sm={3} key={index}>

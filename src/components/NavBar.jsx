@@ -1,7 +1,12 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
+  
+  console.log ("Hello")
+  console.log(props.counter, typeof props.counter)
+
   return (
     <AppBar position="fixed">
       <Toolbar>
@@ -20,15 +25,17 @@ const Navbar = (props) => {
         <Typography variant="h6" sx={{ marginRight: 2 }}>
           Score: {props.score}
         </Typography>
-        
+
+
         {/* Button for high scores */}
-        <Button color="inherit">High Scores</Button>
+        <Button color="inherit" component={Link} to="/HighScores">High Scores</Button>
         
         {/* Button to start again */}
-        <Button color="inherit">Start Again</Button>
+        <Button color="inherit" component={Link} to="/">Start Again</Button>
         
         {/* Contact us button */}
-        <Button color="inherit">Contact Us</Button>
+        <Button color="inherit" component={Link} to="/ContactUs">Contact Us</Button>
+     
       </Toolbar>
     </AppBar>
   );
