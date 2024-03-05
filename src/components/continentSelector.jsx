@@ -4,8 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Africa from '../assets/images/africa.png'
-import AmericaNorth from '../assets/images/americaNorth.png'
-import AmericaSouth from '../assets/images/americaSouth.png'
+import America from '../assets/images/america.png'
 import Asia from '../assets/images/asia.png'
 import Europe from '../assets/images/europe.png'
 import Oceania from '../assets/images/oceania.png'
@@ -54,16 +53,14 @@ export default function ContinentSelector(props) {
     );
 }
 
-const continents = ['Africa', 'North America', 'South America', 'Asia', 'Europe', 'Oceania'];
+const continents = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
 
 const getImageForContinent = (continent) => {
     switch (continent) {
         case 'Africa':
             return Africa;
-        case 'North America':
-            return AmericaNorth;
-        case 'South America':
-            return AmericaSouth;
+        case 'America':
+            return America;
         case 'Asia':
             return Asia;
         case 'Europe':
