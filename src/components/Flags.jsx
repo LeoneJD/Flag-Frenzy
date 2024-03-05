@@ -3,7 +3,11 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
 
 const Flags = (props) => {
     console.log(props);
@@ -13,6 +17,8 @@ const Flags = (props) => {
     const [disableButtons, setDisableButtons] = useState(false);
     const [userName, setUserName] = useState('');
     const [feedback, setFeedback] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
+    const [savedName, setSavedName] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,18 +62,27 @@ const Flags = (props) => {
             setTimeout(() => {
                 // Clear the feedback after 2 second
                 setFeedback(null);
-            }, 2000);
+            }, 1000);
             props.setCounter(props.counter + 1);
             if (props.counter >= 9) {
                 setDisableButtons(true);
-                const name = prompt('Game over. Enter your name:');
-                if (name) {
-                    setUserName(name);
-                }
+                setOpenModal(true);
             }
         }
     };
 
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    };
+
+    const handleNameInputChange = (event) => {
+        setUserName(event.target.value);
+    };
+
+    const handleSaveName = () => {
+        setSavedName(userName);
+        handleCloseModal();
+    };
     
     return (
         <div>
@@ -100,10 +115,28 @@ const Flags = (props) => {
                             {feedback}
                         </div>
                     )}
-                    {props.counter >= 10 && (
-                        <h2>Thank you for playing, {userName}!</h2>
+                    {savedName && (
+                        <h2>Thank you for playing, {savedName}!</h2>
                     )}
-                    {/* <h2>Here you have a random fact</h2> */}
+                    {/* Modal for entering user name */}
+                    <Dialog open={openModal} onClose={handleCloseModal}>
+                        <DialogTitle>The Quiz Has Ended!</DialogTitle>
+                        <DialogContent>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Enter Your Name"
+                                type="text"
+                                fullWidth
+                                value={userName}
+                                onChange={handleNameInputChange}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleSaveName}>Save</Button>
+                        </DialogActions>
+                    </Dialog>
                 </>
             )}
         </div>
