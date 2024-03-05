@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -61,7 +60,7 @@ const Flags = (props) => {
                 setFeedback('Sorry, wrong answer!');
             }
             setTimeout(() => {
-                // Clear the feedback after 1 second
+                // Clear the feedback after 2 second
                 setFeedback(null);
             }, 1000);
             props.setCounter(props.counter + 1);

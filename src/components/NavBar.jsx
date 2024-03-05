@@ -3,9 +3,12 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
-  
-  console.log ("Hello")
-  console.log(props.counter, typeof props.counter)
+
+  const handleStartAgain = () => {
+    // Reset the counter and score to their initial values
+    props.setCounter(0);
+    props.setScore(0);
+  };
 
   return (
     <AppBar position="fixed">
@@ -29,13 +32,15 @@ const Navbar = (props) => {
 
         {/* Button for high scores */}
         <Button color="inherit" component={Link} to="/HighScores">High Scores</Button>
-        
+    
+
         {/* Button to start again */}
-        <Button color="inherit" component={Link} to="/">Start Again</Button>
+        <Button color="inherit" component={Link} to="/" onClick={handleStartAgain}>Start Again</Button>
+        
         
         {/* Contact us button */}
         <Button color="inherit" component={Link} to="/ContactUs">Contact Us</Button>
-     
+  
       </Toolbar>
     </AppBar>
   );
