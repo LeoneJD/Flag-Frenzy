@@ -7,8 +7,8 @@ const ContactUsForm = () => {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Typography variant="h4" align="center" gutterBottom>
+        <Container className="form" maxWidth="sm">
+            <Typography className="form-text" variant="h4" align="center" gutterBottom>
                 Contact Us
             </Typography>
             <form onSubmit={handleSubmit}>
