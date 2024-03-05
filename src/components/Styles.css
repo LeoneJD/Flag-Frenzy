@@ -35,3 +35,13 @@
     padding: 5rem;
     background-color:  #1976d2;
   }
+
+  .form {
+    background-color: white;
+    padding: 5%;
+    border-radius: 1%;
+  }
+
+  .form-text {
+    color: black;
+  }
