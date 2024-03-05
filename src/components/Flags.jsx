@@ -55,7 +55,7 @@ const Flags = (props) => {
                 setFeedback('Sorry, wrong answer!');
             }
             setTimeout(() => {
-                // Clear the feedback after 1 second
+                // Clear the feedback after 2 second
                 setFeedback(null);
             }, 2000);
             props.setCounter(props.counter + 1);
