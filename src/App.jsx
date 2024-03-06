@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route , Link} from "react-router-dom";
 import Countries from "./components/Countries";
 import SingleCountry from "./components/SingleCountry";
 
@@ -18,7 +18,14 @@ function App() {
 
   return (
     <div>
+      <>
+      <NavBar counter={counter} score={score}/>
+      <div>
+        < ContinentSelector setScore={setScore} setCounter={setCounter} score={score} counter={counter}/>
+      </div>
+      <Footer />
 
+    </>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Countries />}></Route>
@@ -26,14 +33,7 @@ function App() {
       </Routes>
     </BrowserRouter>
 
-    {/* <>
-      <NavBar counter={counter} score={score}/>
-      <div>
-        < ContinentSelector setScore={setScore} setCounter={setCounter} score={score} counter={counter}/>
-      </div>
-      <Footer />
-
-    </> */}
+    
     </div>
 
    

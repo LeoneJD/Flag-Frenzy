@@ -29,9 +29,13 @@ const Navbar = (props) => {
         
         {/* Contact us button */}
         <Button color="inherit">Contact Us</Button>
+        {/* General knowledge button */}
+        <Button color="inherit">Geo Knowledge</Button>
       </Toolbar>
     </AppBar>
   );
 }
+
+
 
 export default Navbar;
