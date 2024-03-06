@@ -9,6 +9,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+// Import sound files
+import correctSound from '../assets/fx/correct-answer.wav';
+import incorrectSound from '../assets/fx/incorrect-answer.wav';
 
 
 const Flags = (props) => {
@@ -21,6 +24,10 @@ const Flags = (props) => {
     const [feedback, setFeedback] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [savedName, setSavedName] = useState('');
+
+    // Create audio elements for correct and incorrect sounds
+    const correctAudio = new Audio(correctSound);
+    const incorrectAudio = new Audio(incorrectSound);
 
 
     useEffect(() => {
@@ -59,8 +66,12 @@ const Flags = (props) => {
             if (randomName === clickedCountry) {
                 setFeedback('Correct!');
                 props.setScore(props.score + 1);
+                // Play correct sound
+                correctAudio.play();
             } else {
                 setFeedback('Sorry, wrong answer!');
+                // Play incorrect sound
+                incorrectAudio.play();
             }
             setTimeout(() => {
                 // Clear the feedback after 2 second
@@ -86,7 +97,7 @@ const Flags = (props) => {
         setSavedName(userName);
         handleCloseModal();
     };
-    
+
     return (
         <div>
             {props.selectedContinent && (
