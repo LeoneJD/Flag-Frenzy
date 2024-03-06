@@ -10,6 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+
 const Flags = (props) => {
     console.log(props);
     const [info, setInfo] = useState([]);
@@ -20,6 +21,7 @@ const Flags = (props) => {
     const [feedback, setFeedback] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [savedName, setSavedName] = useState('');
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,7 +65,7 @@ const Flags = (props) => {
             setTimeout(() => {
                 // Clear the feedback after 2 second
                 setFeedback(null);
-            }, 1000);
+            }, 2000);
             props.setCounter(props.counter + 1);
             if (props.counter >= 9) {
                 setDisableButtons(true);
@@ -112,7 +114,7 @@ const Flags = (props) => {
                         </div>
                     )}
                     {feedback && (
-                        <div style={{ color: feedback === 'Correct!' ? 'green' : 'red', padding: '0.5rem', fontWeight: 'bold' }}>
+                        <div style={{ color: feedback === 'Correct!' ? 'white' : 'white', padding: '0.5rem', fontWeight: 'bold' }}>
                             {feedback}
                         </div>
                     )}
