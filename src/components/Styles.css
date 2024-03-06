@@ -45,3 +45,7 @@
   .form-text {
     color: black;
   }
+
+  .flag {
+    box-shadow: 5px 5px 5px black !important;
+  }
