@@ -94,7 +94,15 @@ const Flags = (props) => {
     };
 
     const handleSaveName = () => {
+        const scores = JSON.parse(localStorage.getItem('highScores')) || [];
+        const newScore = { name: userName, score: props.score };
+        scores.push(newScore);
+        scores.sort((oldHighScore, newHighScore) => newHighScore.score - oldHighScore.score);
+        localStorage.setItem('highScores', JSON.stringify(scores.slice(0, 10)));
         setSavedName(userName);
+        setTimeout(() => {
+            history.push('/HighScores');
+        }, 2000); // Save score after 2 seconds
         handleCloseModal();
     };
 
