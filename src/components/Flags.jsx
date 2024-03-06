@@ -98,7 +98,7 @@ const Flags = (props) => {
                             <Grid container spacing={2}>
                                 {randomCountries.map((country, index) => (
                                     <Grid item xs={6} sm={3} key={index}>
-                                        <Card>
+                                        <Card className='flag'>
                                             <CardActionArea onClick={() => handleButtonClick(country.name.common)} disabled={disableButtons}>
                                                 <CardMedia
                                                     component="img"
