@@ -18,7 +18,7 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
 
-async function random-joke() {
+async function randomjoke() {
   const url = 'https://joke-box.p.rapidapi.com/api/v1/jokes/DadJokes';
   const options = {
     method: 'GET',
@@ -39,7 +39,7 @@ async function random-joke() {
   }
 }
   
-random-joke() 
+randomjoke() 
 
 
 
