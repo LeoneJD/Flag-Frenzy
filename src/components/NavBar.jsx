@@ -40,6 +40,8 @@ const Navbar = (props) => {
         
         {/* Contact us button */}
         <Button color="inherit" component={Link} to="/ContactUs">Contact Us</Button>
+        {/* Geo Knowledge Button */}
+        <Button color="inherit" component={Link} to="/Countries">Geo Knowledge</Button>
   
       </Toolbar>
     </AppBar>

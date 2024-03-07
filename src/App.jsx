@@ -1,3 +1,8 @@
+
+import Countries from "./pages/Countries";
+import SingleCountry from "./pages/SingleCountry";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { useState } from 'react'
 import './App.css'
 import * as React from 'react';
@@ -19,9 +24,13 @@ function App() {
       <Router >
         <NavBar counter={counter} score={score}/>
           <Routes>
-            <Route path='/' element={<LandingPage setScore={setScore} setCounter={setCounter} counter={counter} score={score} />} />
+            
+            <Route path='' element={<LandingPage setScore={setScore} setCounter={setCounter} counter={counter} score={score} />} />
             <Route path='/HighScores' element={<HighScores />} />
             <Route path='/ContactUs' element={<ContactUs />} />
+
+            <Route path="/Countries" element={<Countries />}></Route>
+            {<Route path="/:name" element={<SingleCountry />}></Route>}
           </Routes>
         <Footer />
       </Router >
