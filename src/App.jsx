@@ -32,7 +32,7 @@ function App() {
             <Route path="/Countries" element={<Countries />}></Route>
             {<Route path="/:name" element={<SingleCountry />}></Route>}
           </Routes>
-        <Footer />
+        <Footer/>
       </Router >
   )
 }
