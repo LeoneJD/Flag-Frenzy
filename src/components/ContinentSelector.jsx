@@ -45,7 +45,7 @@ export default function ContinentSelector(props) {
                 >
                     {/* Display image for selected continent */}
                     {showImages && (
-                        <img
+                        <img className='continentImg'
                             src={getImageForContinent(selectedContinent)}
                             alt={selectedContinent}
                         />
