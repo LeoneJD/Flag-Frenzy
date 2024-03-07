@@ -63,3 +63,11 @@
   display: flex;
   align-items: center;
 }
+
+.jokeSection {
+  margin-top: 20px;
+}
+
+.thankyou {
+  margin-top: 20px; 
+}

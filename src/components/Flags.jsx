@@ -167,12 +167,14 @@ const Flags = (props) => {
                         </div>
                     )}
                     {savedName && (
-                        <h2>Thank you for playing, {savedName}!</h2>
+                        <h2 className="thankyou">Thank you for playing, {savedName}!</h2>
                     )}
-                     <div>
+                     <div className="jokeSection">
                     <h3>Joke of the day:</h3>
                     <p>{RandomJoke}</p>
                     </div>
+                    
+
                     {/* Modal for entering user name */}
                     <Dialog open={openModal} onClose={handleCloseModal}>
                         <DialogTitle>The Quiz Has Ended!</DialogTitle>
