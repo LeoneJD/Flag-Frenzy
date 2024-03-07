@@ -18,7 +18,31 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
 
+async function testing() {
+  const url = 'https://joke-box.p.rapidapi.com/api/v1/jokes/DadJokes';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '4e3e1380e7msh1244316b160181bp1c5e19jsn8f3e50c9ecab',
+      'X-RapidAPI-Host': 'joke-box.p.rapidapi.com'
+    }
+  };
   
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    console.log(result);
+    console.log(result[0]);
+    console.log(result[0].Joke);
+  } catch (error) {
+    console.error(error);
+  }
+}
+  
+testing() 
+
+
+
   return (
 
       <Router >
@@ -38,3 +62,4 @@ function App() {
 }
 
 export default App
+
