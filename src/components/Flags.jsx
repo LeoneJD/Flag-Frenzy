@@ -169,7 +169,7 @@ const Flags = (props) => {
                     {savedName && (
                         <h2>Thank you for playing, {savedName}!</h2>
                     )}
-                     <div>
+                     <div className="jokeSection">
                     <h3>Joke of the day:</h3>
                     <p>{RandomJoke}</p>
                     </div>
