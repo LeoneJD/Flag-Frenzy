@@ -24,6 +24,7 @@ const Flags = (props) => {
     const [feedback, setFeedback] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [savedName, setSavedName] = useState('');
+    const [RandomJoke, setRandomJoke] = useState('');
 
     // Create audio elements for correct and incorrect sounds
     const correctAudio = new Audio(correctSound);
@@ -105,6 +106,34 @@ const Flags = (props) => {
         }, 2000); // Save score after 2 seconds
         handleCloseModal();
     };
+    
+    async function fetchRandomJoke() {
+        const url = 'https://joke-box.p.rapidapi.com/api/v1/jokes/DadJokes';
+        const options = {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': '4e3e1380e7msh1244316b160181bp1c5e19jsn8f3e50c9ecab',
+            'X-RapidAPI-Host': 'joke-box.p.rapidapi.com'
+          }
+        };
+        
+        try {
+          const response = await fetch(url, options);
+          const result = await response.json();
+          return result[0].Joke; 
+        } catch (error) {
+          console.error(error);
+          return 'Failed to fetch joke'; 
+        }
+      }
+      useEffect(() => {
+        const getJoke = async () => {
+          const joke = await fetchRandomJoke();
+          setRandomJoke(joke); // Use the setRandomJoke state setter to store the fetched joke
+        };
+      
+        getJoke();
+      }, []);
 
     return (
         <div>
@@ -140,6 +169,10 @@ const Flags = (props) => {
                     {savedName && (
                         <h2>Thank you for playing, {savedName}!</h2>
                     )}
+                     <div>
+                    <h3>Joke of the day:</h3>
+                    <p>{RandomJoke}</p>
+                    </div>
                     {/* Modal for entering user name */}
                     <Dialog open={openModal} onClose={handleCloseModal}>
                         <DialogTitle>The Quiz Has Ended!</DialogTitle>

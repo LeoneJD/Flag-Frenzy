@@ -18,7 +18,6 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
 
-  
   return (
 
       <Router >
