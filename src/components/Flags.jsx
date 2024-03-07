@@ -170,7 +170,7 @@ const Flags = (props) => {
                         <h2>Thank you for playing, {savedName}!</h2>
                     )}
                      <div>
-                    <h2>Here's a joke as a reward:</h2>
+                    <h3>Joke of the day:</h3>
                     <p>{RandomJoke}</p>
                     </div>
                     {/* Modal for entering user name */}
