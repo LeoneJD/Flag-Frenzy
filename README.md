@@ -48,7 +48,7 @@ So that I can immerse myself in an enjoyable experience while expanding my knowl
 To use the application here you have the link to the deployed webpage: https://flag-frenzy.netlify.app/
 And here is the link to the repository: https://github.com/LeoneJD/Flag-Frenzy
 
-Quiz game where the user can show his/her knowledge in country Flags. First need to select the continent and then a county name appears with 4 different flags. The user needs to click on the correct flag, and so on during 10 times. During the game the user can see on the navbar the score and round he has already played. At the end a modal opens to ask for the user name that will go to the High Scores section also in the navbar. There are two other buttons, one to start the game again, and the last one to learn more interesting data about the countries.
+Quiz game where the user can show his/her knowledge in country Flags. First need to select the continent and then a county name appears with 4 different flags. The user needs to click on the correct flag, and so on during 10 times. During the game the user can see on the navbar the score and round he has already played. At the end a modal opens to ask for the user name that will go to the High Scores section also in the navbar. There are two other buttons, one to start the game again, and the last one to learn more interesting data about the countries (GEO Knowledge).
 
 Here you have a screenshot from the web page:
 
@@ -86,7 +86,7 @@ Sources:
 
 - https://www.pixabay.com (images)
 
-- https://www.flavicon.co (icon)
+- https://www.flavicon.com (icon)
 
 - https://www.framer.com/motion/
 
