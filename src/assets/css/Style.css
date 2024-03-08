@@ -34,12 +34,19 @@
 .continentAutocomplete {
   padding: 5rem;
   background-color:  #1976d2;
+  border: 1px solid black !important;
+  border-radius: 1rem;
 }
 
+.continentImage {
+  width: 100px; 
+  height: auto; /* Automatically adjust height to maintain aspect ratio */
+}
 .form {
   background-color: white;
   padding: 5%;
   border-radius: 1%;
+  border: '1px solid black',
 }
 
 .form-text {
@@ -53,6 +60,7 @@
 .highscore-card {
   background-color: white;
   padding: 20px;
+  border-radius: 1%;
 }
 
 .highscore-title {
